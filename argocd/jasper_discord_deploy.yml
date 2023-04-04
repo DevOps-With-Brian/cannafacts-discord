@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cannafacts-discord
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: cannafacts-discord
+  template:
+    metadata:
+      labels:
+        app: cannafacts-discord
+    spec:
+      containers:
+      - name: cannafacts-discord 
+        image: "devopswithbrian/cannafacts-discord:0.0.1"
+        imagePullPolicy: Always
+        tty: true
+        env:
+          - name: PYTHONUNBUFFERED
+            value: "0"
+          - name: DISCORD_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: cannafacts-prd
+                key: DISCORD_TOKEN
+          - name: API_URL
+            valueFrom:
+              secretKeyRef:
+                name: cannafacts-prd
+                key: API_URL
