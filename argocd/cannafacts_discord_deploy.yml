@@ -24,10 +24,10 @@ spec:
           - name: DISCORD_TOKEN
             valueFrom:
               secretKeyRef:
-                name: cannafacts-prd
+                name: cannafacts-twitch-prd
                 key: DISCORD_TOKEN
           - name: API_URL
             valueFrom:
               secretKeyRef:
-                name: cannafacts-prd
+                name: cannafacts-twitch-prd
                 key: API_URL
